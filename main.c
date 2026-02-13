@@ -8,23 +8,24 @@
  * Usage: ls2 <path> [exact-match-pattern]
  */
 int main(int argc, char* argv[]) {
-	// stack stores the lines to print out
-	stack_t *s = initstack();
+	//check if the usage is correct, if not, print instructions
+	if (argc < 2 || argc>3){
+		printf("Usage: ls2 <path> [exact-match-pattern]\n");
+		return 0;
+	}
+	char* directory = argv[1];
+	//2 args in command line, use mode 1
+	if (argc == 2){
+		lsMode1(directory, 0);
+	}
+	//3 args in command line, use mode 2 to search for pattern
+	else {
+		char* pattern = argv[2];
+		stack_t* stack = initstack();
+		lsMode2(directory, pattern, 0, stack);
+		printstack(stack);
+		free(stack);
+	}
 
-	push(s, "Hello1");
-	push(s, "Hello2");
-	push(s, "Hello3");
-
-	// print stack
-	printstack(s);
-
-	char *top = pop(s);
-	printf("Top of stack: %s\n", top);
-
-	// print stack
-	printstack(s);
-
-	// free stack
-	freestack(s);
 	return 0;
 }

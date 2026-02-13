@@ -8,6 +8,9 @@
 #define FALSE 0
 #define INDENT "    "
 
+void lsMode1(char*, int);
+int lsMode2(char*, char*, int, stack_t*);
+
 extern stack_t *s;  // pointer to the stack to hold the listings
 
 #endif
